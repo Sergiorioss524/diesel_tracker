@@ -264,6 +264,35 @@ select {
 .result-line.total { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 12px; font-size: 15px; }
 .result-line.total .rl-value { font-size: 17px; }
 
+/* ============ SHIPMENT MAP ============ */
+.map-wrap { margin: 14px 0 18px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.ship-map { width: 100%; height: 320px; background: var(--paper-sunken); }
+.map-wrap.map-loading {
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-muted);
+  font-size: 13px;
+  background: var(--paper-sunken);
+}
+.map-hint { margin: 8px 2px 0; font-size: 12px; color: var(--ink-muted); }
+.leaflet-container { font-family: inherit; background: var(--paper-sunken); }
+.map-dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9); }
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--paper-raised) 85%, transparent) !important;
+  color: var(--ink-muted) !important;
+}
+.leaflet-control-attribution a { color: var(--ink-soft) !important; }
+.port-marker span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--paper-raised);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
 /* ============ TRACKER ============ */
 .track-form { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
 @media (max-width: 900px) { .track-form { grid-template-columns: 1fr 1fr; } }

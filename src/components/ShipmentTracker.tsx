@@ -1,8 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { FormEvent, useState } from "react";
 import { useShipments } from "@/hooks/useShipments";
+import { useTheme } from "@/hooks/useTheme";
 import { STATUS_LABELS } from "@/lib/types";
+
+const ShipmentMap = dynamic(() => import("@/components/ShipmentMap"), {
+  ssr: false,
+  loading: () => <div className="map-wrap map-loading">Cargando mapa…</div>,
+});
 
 function trackUrl(name: string, imo: string): string {
   const q = imo || name;
@@ -11,6 +18,7 @@ function trackUrl(name: string, imo: string): string {
 
 export default function ShipmentTracker() {
   const { shipments, addShipment, removeShipment, cycleStatus } = useShipments();
+  const { mode } = useTheme();
   const [name, setName] = useState("");
   const [imo, setImo] = useState("");
   const [origin, setOrigin] = useState("");
@@ -44,6 +52,8 @@ export default function ShipmentTracker() {
         ubicación no viven dentro de esta página — el enlace te lleva al sitio del rastreador con
         la búsqueda ya cargada.
       </p>
+
+      <ShipmentMap shipments={shipments} themeMode={mode} />
 
       <form className="track-form" onSubmit={handleAdd}>
         <label className="field">
