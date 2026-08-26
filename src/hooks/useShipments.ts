@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useSyncExternalStore } from "react";
-import { Shipment, ShipmentStatus, STATUS_LABELS } from "@/lib/types";
+import { useCallback, useEffect, useSyncExternalStore } from "react";
+import { SEED_SHIPMENTS, Shipment, ShipmentStatus, STATUS_LABELS } from "@/lib/types";
 import {
   getLocalStorageRaw,
   subscribeLocalStorageKey,
@@ -36,6 +36,12 @@ function getServerSnapshot(): Shipment[] {
 
 export function useShipments() {
   const shipments = useSyncExternalStore(subscribe, computeSnapshot, getServerSnapshot);
+
+  useEffect(() => {
+    if (getLocalStorageRaw(SHIP_KEY) === null) {
+      writeLocalStorageRaw(SHIP_KEY, JSON.stringify(SEED_SHIPMENTS));
+    }
+  }, []);
 
   const addShipment = useCallback((shipment: Omit<Shipment, "status">) => {
     const next = [...computeSnapshot(), { ...shipment, status: "programado" as ShipmentStatus }];

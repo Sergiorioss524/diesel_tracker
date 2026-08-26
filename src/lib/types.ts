@@ -65,4 +65,39 @@ export interface Shipment {
   status: ShipmentStatus;
 }
 
+export const SEED_SHIPMENTS: Shipment[] = [
+  {
+    name: "MT Gulf Voyager",
+    imo: "9456127",
+    origin: "Houston",
+    dest: "Rotterdam",
+    date: "2026-08-20",
+    status: "transito",
+  },
+  {
+    name: "MT Pacific Horizon",
+    imo: "9387215",
+    origin: "Singapore",
+    dest: "Fujairah",
+    date: "2026-09-02",
+    status: "programado",
+  },
+  {
+    name: "MT Coral Endeavor",
+    imo: "9512334",
+    origin: "Santos",
+    dest: "Buenos Aires",
+    date: "2026-08-10",
+    status: "llegado",
+  },
+  {
+    name: "MT Northern Star",
+    imo: "9298871",
+    origin: "Rotterdam",
+    dest: "Houston",
+    date: "2026-08-05",
+    status: "retrasado",
+  },
+];
+
 export type ThemeMode = "system" | "light" | "dark";
